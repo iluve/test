@@ -32,47 +32,42 @@ node('master') {
           checkout scm
        }
 
-       stage('Test'){
+       stage('Analisis Estatico'){
 
-         env.NODE_ENV = "test"
-
-         print "Environment will be : ${env.NODE_ENV}"
-
-         sh 'node -v'
-         sh 'npm prune'
-         sh 'npm install'
-         sh 'npm test'
+        echo 'Analisis en Sonarqube'
 
        }
 
-       stage('Build Docker'){
+       stage('Build Docker y Despliegue'){
 
-            sh './dockerBuild.sh'
+             echo 'Build y run de la imagen'
        }
 
-       stage('Deploy'){
+       stage('Pruebas Unitarias'){
 
-         echo 'Push to Repo'
-         sh './dockerPushToRepo.sh'
-
-         echo 'ssh to web server and tell it to pull new image'
-         sh 'ssh deploy@xxxxx.xxxxx.com running/xxxxxxx/dockerRun.sh'
-
+         echo 'Pruebas unitarias con chai'
        }
+            
+        stage('Pruebas de Regresion'){
 
-       stage('Cleanup'){
+        echo 'Pruebas unitarias con chai'
+        }
+        
+            stage('Pruebas de Seguridad'){
 
-         echo 'prune and cleanup'
-         sh 'npm prune'
-         sh 'rm node_modules -rf'
+        echo 'Pruebas de seguridad'
+        }
 
-         mail body: 'project build successful',
-                     from: 'xxxx@yyyyy.com',
-                     replyTo: 'xxxx@yyyy.com',
-                     subject: 'project build successful',
-                     to: 'yyyyy@yyyy.com'
-       }
+        stage('Pruebas de Perormance'){
 
+        echo 'Pruebas de performance'
+        }
+            
+            stage('Pruebas de Perormance'){
+
+        echo 'Pruebas de performance'
+        }
+        
 
 
     }
