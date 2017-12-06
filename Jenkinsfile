@@ -34,40 +34,51 @@ node('master') {
 
        stage('Analisis Estatico'){
 
-        echo 'Analisis en Sonarqube'
+         steps {
+               echo 'Enviado a Sonarqube ...'
+            }
+               
+         
 
        }
 
        stage('Build Docker y Despliegue'){
-
-             echo 'Build y run de la imagen'
+         steps {
+             echo 'Construyendo Imagen ...'
+                 
+              echo 'Desplegando aplicacion...'
+                 
+         }
+         
        }
 
        stage('Pruebas Unitarias'){
-
-         echo 'Pruebas unitarias con chai'
+        steps {
+         echo 'Ejecutando Pruebas unitarias y determinando cobertura'
+        }
        }
             
         stage('Pruebas de Regresion'){
-
-        echo 'Pruebas unitarias con chai'
+                steps{
+                 echo 'Ejecutando pruebas en selenium .....'
+                }
         }
         
-            stage('Pruebas de Seguridad'){
-
-        echo 'Pruebas de seguridad'
+        stage('Pruebas de Seguridad'){
+                steps{
+                        echo 'Ejecutando pruebas de seguridad ...'
+                }
+                 
         }
 
         stage('Pruebas de Perormance'){
 
-        echo 'Pruebas de performance'
+        steps{
+                        echo 'Ejecutando pruebas de performance ...'
+                }
         }
             
-            stage('Pruebas de Perormance'){
-
-        echo 'Pruebas de performance'
-        }
-        
+    
 
 
     }
