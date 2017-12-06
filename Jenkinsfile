@@ -8,10 +8,22 @@ pipeline {
             }
         }
         stage('Test') {
+           
+            parallel A: {
+                steps {
+                    echo 'Testing A..'
+                }
+            },
+            B: {
+            
             steps {
-                echo 'Testing..'
+                    echo 'Testing B..'
+                }
+            
+            
             }
-        }
+            
+        } 
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
